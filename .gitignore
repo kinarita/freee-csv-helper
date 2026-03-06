@@ -1,0 +1,45 @@
+# Python
+__pycache__/
+*.pyc
+*.py[cod]
+*$py.class
+*.so
+.Python
+.venv/
+venv/
+env/
+*.egg-info/
+.eggs/
+dist/
+build/
+
+# IDE / Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# 実データ・個人設定（Git 管理しない）
+meisai/*.csv
+!meisai/.gitkeep
+rules.yaml
+
+# 生成物CSV（プロジェクト直下）
+combined.csv
+combined_clean.csv
+combined_duplicates.csv
+freee_import.csv
+need_review.csv
+store_summary_with_account.csv
+potential_issues.csv
+
+# 出力ディレクトリの中身（ディレクトリ自体は .gitkeep で保持）
+output/*
+!output/.gitkeep
+
+# 一時・ロックファイル
+.~lock.*
+*.tmp
+*.bak
+.DS_Store

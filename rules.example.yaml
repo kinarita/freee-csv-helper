@@ -1,0 +1,46 @@
+# rules.example.yaml
+# 使い方: このファイルを rules.yaml にコピーし、ご自身の環境に合わせて編集してください。
+# rules.yaml は Git にコミットしないでください（.gitignore で除外済み）。
+
+open_date: "2025-01-01"
+
+# ルールは上から優先（店名・メモの部分一致で勘定科目を付与）
+rules:
+  - account: "通信費"
+    keywords:
+      - "AWS"
+      - "〇〇通信"
+      # ご利用明細の表記に合わせてキーワードを追加
+
+  - account: "支払手数料"
+    keywords:
+      - "FREEE"
+      - "freee"
+
+  - account: "消耗品費"
+    keywords:
+      - "〇〇ストア"
+      # 例: メルカリ、Amazon など
+
+  # いったん要確認に落として手動で振り分けたい場合は「要確認」ルールを追加
+  - account: "要確認"
+    keywords:
+      - "APPLE"
+
+# 特例（店名にキーワードが含まれる場合に、メモ内容で勘定科目を分岐）
+special_cases:
+  apple:
+    shop_keywords: ["APPLE"]
+    memo_map:
+      # メモに developer が含まれれば通信費
+      "developer": "通信費"
+      # メモに ipad が含まれれば資産
+      "ipad": "工具器具備品"
+    default: "要確認"
+
+  # 例: フリマ系はメモで資産か消耗品かを分ける
+  # mercari:
+  #   shop_keywords: ["メルカリ", "MERCARI"]
+  #   memo_map:
+  #     "pc": "工具器具備品"
+  #   default: "消耗品費"
