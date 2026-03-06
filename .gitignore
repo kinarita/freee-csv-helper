@@ -20,6 +20,9 @@ build/
 *.swo
 *~
 
+# 作業フォルダ（Git 管理しない）
+old/
+
 # 実データ・個人設定（Git 管理しない）
 meisai/*.csv
 !meisai/.gitkeep
