@@ -5,7 +5,7 @@ process_keihi.py (YAML rules, final)
 - 対象チェック=1 を抽出
 - 店名/メモで勘定科目を自動付与（rules.yaml）
 - 開業日(open_date)より前の支出を「開業費」に振替（ただし資産=工具器具備品は除外）
-- freee_import.csv / need_review.csv / store_summary_with_account.csv を出力
+- freee_import.xlsx（Excel形式）/ need_review.csv / store_summary_with_account.csv を出力
 
 使い方:
   python3 process_keihi.py combined_clean.csv
@@ -29,6 +29,12 @@ try:
     import yaml
 except ImportError:
     print("ERROR: PyYAML が必要です。`pip install pyyaml` を実行してください。", file=sys.stderr)
+    sys.exit(1)
+
+try:
+    import openpyxl
+except ImportError:
+    print("ERROR: openpyxl が必要です。`pip install openpyxl` を実行してください。", file=sys.stderr)
     sys.exit(1)
 
 # -------------------------
@@ -236,9 +242,10 @@ def main():
 
     freee.loc[is_before_open & ~is_asset, "勘定科目"] = "開業費"
 
-    # 出力（常にリポジトリ直下）
-    freee.to_csv(PROJECT_ROOT / "freee_import.csv", index=False, encoding="utf-8-sig")
-    print("作成: freee_import.csv")
+    # 出力（常にリポジトリ直下）- freee は Excel 形式での取り込みに対応
+    freee_import_path = PROJECT_ROOT / "freee_import.xlsx"
+    freee.to_excel(freee_import_path, index=False, engine="openpyxl")
+    print("作成: freee_import.xlsx（Excel形式）")
 
     need = freee[freee["勘定科目"] == "要確認"].copy()
     need.to_csv(PROJECT_ROOT / "need_review.csv", index=False, encoding="utf-8-sig")
