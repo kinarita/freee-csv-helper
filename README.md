@@ -34,9 +34,7 @@ project_root
 ├── LICENSE
 ├── .gitignore
 ├── requirements.txt
-├── meisai
-│   └── .gitkeep
-└── output
+└── meisai
     └── .gitkeep
 ```
 

@@ -22,6 +22,7 @@ build/
 
 # 作業フォルダ（Git 管理しない）
 old/
+output/
 
 # 実データ・個人設定（Git 管理しない）
 meisai/*.csv
@@ -37,10 +38,6 @@ freee_import.xlsx
 need_review.csv
 store_summary_with_account.csv
 potential_issues.csv
-
-# 出力ディレクトリの中身（ディレクトリ自体は .gitkeep で保持）
-output/*
-!output/.gitkeep
 
 # 一時・ロックファイル
 .~lock.*
